@@ -25,5 +25,5 @@ public class AppointmentController {
         Appointment savedAppointment = appointmentRepository.save(appointment);
         return ResponseEntity.status(201).body(savedAppointment);
     }
-
+//@RequestBody -- mapeaza body-ul primit din Postman cu Appointment appointment
 }
