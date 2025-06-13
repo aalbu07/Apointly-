@@ -22,7 +22,6 @@ public class ProviderServiceImpl implements ProviderService {
     private final ProviderRepository providerRepository;
     private final ProviderMapper providerMapper;
 
-
     @Override
     @Transactional
     public ProviderDto createProvider(CreateProviderRequest createProviderRequest) {
@@ -40,8 +39,7 @@ public class ProviderServiceImpl implements ProviderService {
 
         // 4. TRANSLATE & SERVE: Translate the saved entity (which now has an ID!) back to a DTO to send back to the waiter (controller).
         return providerMapper.toProviderDto(savedProvider);
-    };
-
+    }
 
     // Get one provider by their ID
     @Override
@@ -71,7 +69,4 @@ public class ProviderServiceImpl implements ProviderService {
         // 2. TRANSLATE & SERVE: Use our handy list mapper to convert the whole list of entities to a list of DTOs.
         return providerMapper.toProviderDtoList(providers);
     }
-
 }
-
-

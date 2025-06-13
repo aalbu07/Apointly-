@@ -2,6 +2,7 @@ package org.example.apointly.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,16 +26,31 @@ public class GlobalApiExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST) // This handler will always return HTTP 400 Bad Request
+//
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+//        Map<String, String> errors = new HashMap<>();
+//        ex.getBindingResult().getAllErrors().forEach((error) -> {
+//            String fieldName = error instanceof FieldError ?
+//                    ((FieldError) error).getField() :
+//                    error.getObjectName();
+//            String message = error.getDefaultMessage();
+//            errors.put(fieldName, message);
+//        });
+//        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+//    }
+
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        // This handles validation errors from the @Valid annotation
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
+            String fieldName = (FieldError)
+
+            //errors.put(fieldName, message);
         });
-        return errors;
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }

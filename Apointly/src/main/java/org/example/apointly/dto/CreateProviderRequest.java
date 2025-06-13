@@ -21,6 +21,7 @@ public class CreateProviderRequest {
     @Email(message = "Please provide a valid email address")
     private String email;
 
+    @NotBlank(message = "Phone cannot be blank")
     @Size(max = 20, message = "Phone number must be less than 20 characters")
     private String phoneNumber; // Optional
 

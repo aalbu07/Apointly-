@@ -10,5 +10,4 @@ public interface ProviderService {
     ProviderDto getProviderByEmail(String email);
     ProviderDto createProvider(CreateProviderRequest createProviderRequest);
     List<ProviderDto> getAllProviders();
-
 }
